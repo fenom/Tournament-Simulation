@@ -12,6 +12,9 @@ public class Player{
 		this.decks=decks;
 		usedDecks=new boolean[decks.size()];
 	}
+	public Player(String name){
+		this.name=name;
+	}
 	public boolean hasDecks(){
 		for(boolean b: usedDecks){
 			if(!b)
