@@ -1,0 +1,19 @@
+Tournament formats: Swiss, Single Elim, Double elim.
+
+Bracket could be a tree data type.  Sparse at first except for leaves.
+
+Question about swiss: Tiebreakers?  Fields in the player field for opp win % and opp opp win %.
+
+We need option for manually creating bracket and option for auto generated random bracket.
+
+Output of a tournament simulation: Rankings of each player 1 to N.
+1. David
+2. HC
+3. Owen
+4. Reed
+5. Brian
+6. Brian
+7. Keith
+8. Ann
+
+Map<Ranking,List<Pair<Player,Number of Times at that Rank>>
