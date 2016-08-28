@@ -1,3 +1,4 @@
+package Tournament;
 public interface Tournament{
 	List<Player> players;
 	Format format;
