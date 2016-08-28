@@ -1,15 +1,17 @@
 package Player;
 import java.util.Map;
+
 public class Deck{
 	public String name;
-	public Map<Integer,Integer> matchups;
+	public Map<Integer,Float> matchups;
 	public int id;
-	public Deck(String name, Map<Integer,Integer> matchups,int id){
+	public Deck(String name, Map<Integer,Float> matchups,int id){
 		this.name=name;
 		this.matchups=matchups;
 		this.id=id;
 	}
-	public int getWinPercentage(Deck deck){
+	
+	public Float getWinPercentage(Deck deck){
 		return this.matchups.get(deck.id);
 	}
 }
