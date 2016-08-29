@@ -22,6 +22,16 @@ public class BracketNodeTests{
 	public void testSpace(){
 		assert(countSpace(test)==(2*size-1));
 	}
+	@Test
+	public void testPlayersAtLeaves(){
+		assert(playersAtLeaves(test));
+	}
+	public boolean playersAtLeaves(BracketNode head){
+		if(head.payload!=null){
+			return head.left!=null && head.right!=null;
+		}
+		return playersAtLeaves(head.left) && playersAtLeaves(head.right);
+	}
 	public int countPlayers(BracketNode head){
 		if(head.payload!=null)
 			return 1;

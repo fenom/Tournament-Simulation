@@ -7,11 +7,13 @@ public class Player{
 	public int id; //This seems like it will be useful, not sure.
 	public boolean isActive=true; //Used for Last hero standing
 	private boolean[] usedDecks; //False indicates a deck is unused.
-	public	Player(String name, List<Deck> decks){
+	public	Player(String name, List<Deck> decks,int id){
 		this.name=name;
 		this.decks=decks;
+		this.id=id;
 		usedDecks=new boolean[decks.size()];
 	}
+	//Just for testing purposes.
 	public Player(String name){
 		this.name=name;
 	}
@@ -42,5 +44,7 @@ public class Player{
 	public void resetDecks(){
 		usedDecks=new boolean[decks.size()];
 	}
-
+	public boolean equals(Player p){
+		return p.id==this.id;
+	}
 }
