@@ -1,11 +1,11 @@
+package Format;
 import java.util.Random;
-import Player.Player;
-
+import Player.*;
 public class Conquest implements Format{
 	
 	public Player play(Player playerOne,Player playerTwo){		
 		Player winner;
-		while(playerOne.hasDecks() || playerTwo.hasDecks()){
+		while(playerOne.hasDecks() && playerTwo.hasDecks()){
 			Deck playerOneDeck = playerOne.getUnusedDeck();
 			Deck playerTwoDeck = playerTwo.getUnusedDeck();
 			

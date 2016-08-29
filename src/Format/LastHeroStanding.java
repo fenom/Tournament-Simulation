@@ -1,5 +1,6 @@
+package Format;
 import java.util.Random;
-import Player.Player;
+import Player.*;
 
 public class LastHeroStanding implements Format{
 	

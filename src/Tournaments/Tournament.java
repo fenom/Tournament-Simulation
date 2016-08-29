@@ -1,9 +1,8 @@
 package Tournaments;
 import Format.*;
+import Player.*;
+import java.util.*;
 public interface Tournament{
-	List<Player> players;
-	Format format;
-	DataObject data;
 	//Need a structure to hold current rounds and standings
 	/*
 	Simulates the next round of play.

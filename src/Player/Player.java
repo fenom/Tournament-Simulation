@@ -20,7 +20,7 @@ public class Player{
 	public boolean hasDecks(){
 		for(boolean b: usedDecks){
 			if(!b)
-				return true;;
+				return true;
 		}
 		return false;
 	}
