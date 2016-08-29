@@ -1,20 +1,13 @@
 import java.util.Random;
 import Player.Player;
 
-public class LastHeroStanding implements Format{
+public class Conquest implements Format{
 	
 	public Player play(Player playerOne,Player playerTwo){		
 		Player winner;
-		Deck playerOneDeck;
-		Deck playerTwoDeck;
-		
 		while(playerOne.hasDecks() || playerTwo.hasDecks()){
-			if(playerOne.isActive){
-				playerOneDeck = playerOne.getUnusedDeck();
-			}
-			if(playerTwo.isActive){
-				playerTwoDeck = playerTwo.getUnusedDeck();
-			}
+			Deck playerOneDeck = playerOne.getUnusedDeck();
+			Deck playerTwoDeck = playerTwo.getUnusedDeck();
 			
 			float playerOneWin = playerOneDeck.getWinPercentage(playerTwoDeck);
 			
@@ -22,18 +15,14 @@ public class LastHeroStanding implements Format{
 			float playerTwoWin = rng.nextFloat();
 			
 			if(playerOneWin > playerTwoWin){
-				playerTwo.setDeckToUsed(playerTwoDeck);
-				playerOne.isActive = false;
-				playerTwo.isActive = true;
+				playerOne.setDeckToUsed(playerOneDeck);
 			}
 			else{
-				playerOne.setDeckToUsed(playerOneDeck);
-				playerOne.isActive = true;
-				playerTwo.isActive = false;
+				playerTwo.setDeckToUsed(playerTwoDeck);
 			}
 		}
 		
-		if(playerTwo.hasDecks()){
+		if(playerOne.hasDecks()){
 			winner = playerTwo;
 		}
 		else{
