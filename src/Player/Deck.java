@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package Player;
 import java.util.Map;
 public class Deck{
