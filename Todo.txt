@@ -1,0 +1,35 @@
+1. In order to make bracket node work smoothly with seeding players with byes, I want to do a bit of refactoring:
+  Currently generating a bracket is done statically within the BracketNode class.
+    This is sloppy and should be moved to a different class.
+    Furthermore, to ease proper seeding, I want to create a perfect power of 2 bracket then expand nodes to add
+    "play in" matches as needed.  (See bracket construction notes below).
+    In order to make this easier, I want to mpa player id to bracket node, so I don't have to search for places to insert.
+  Since players are placed left to right in the bracket as is.  When seeding matters, I plan to swap the even number players
+  from the beginning to the end to crate a proper seeding system.
+1->1                              1
+2->8                    [Winner of 8 and 9]
+3->3                              3
+4->6                              6
+5->5   After inserting 9 and 10-> 5
+6->4                              4
+7->7                    [Winner of 7 and 10]
+8->2                              2
+9
+10
+  All in all this will involve making a BracketConstruction class.  And will need to change code in SingleElim, BracketNode,
+  and the corresponding tests.
+2. In order to make the data we get from simulations customizable, we should create an object that aggregates the data after
+  each simulation.  The following are requirements from chatting with shoop:
+  "I would have stored data on each player, their lineup, their path through the bracket including match/game results, and their finish
+
+and you could index by player ID and also provide an index by placement
+
+so you could ask, what were the top 8 lineups
+
+or did player 112 make top 8
+
+or how many players brought zoo and how many players with zoo made top 8
+"
+  It is incredibly important these tasks are done in minimal time, as they will be done 10,000+ times everytime a full
+  simulation is run.
+  Also, maybe Player should have a placement field.
