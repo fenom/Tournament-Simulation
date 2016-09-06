@@ -13,5 +13,5 @@ public interface Tournament{
 	*/
 	public void getResults();
 
-	public void setup(List<Player> players);
+	public void setup();
 }

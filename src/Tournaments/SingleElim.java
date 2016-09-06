@@ -10,7 +10,7 @@ public class SingleElim implements Tournament{
 	public SingleElim(List<Player> players,Format format){
 		this.players=players;
 		this.format=format;
-		bracket=BracketNode.generateBracketHelper(players);
+		this.setup();
 	}
 	public void processRounds(){
 		processHelper(bracket);
@@ -22,15 +22,15 @@ public class SingleElim implements Tournament{
 		}
 		Player playerOne=head.left.payload;
 		Player playerTwo=head.right.payload;
-		if(playerOne!=null && playerTwo!=null){
+//		if(playerOne!=null && playerTwo!=null){
 			head.payload=format.play(playerOne,playerTwo);
-		}
+//		}
 	}
 	public BracketNode getBracket(){
 		return bracket;
 	}
-	public void setup(List<Player> players){
-		bracket=BracketNode.generateBracketHelper(players);
+	public void setup(){
+		bracket=BracketConstruction.generateBracketHelper(this.players);
 	}
 	public void getResults(){}
 }

@@ -13,6 +13,8 @@ public class Deck{
 		this.id=id;
 	}
 	public Float getWinPercentage(Deck deck){
+//		if(deck.id==this.id)
+//			return .5f;
 		return this.matchups.get(deck.id);
 	}
 }

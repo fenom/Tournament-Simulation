@@ -12,7 +12,7 @@ public class BracketNodeTests{
 		for(int i=0;i<size;i++){
 			players.add(new Player(String.valueOf(i)));
 		}
-		test=BracketNode.generateBracketHelper(players);
+		test=BracketConstruction.generateBracketHelper(players);
 	}
 	@Test
 	public void testNumberOfPlayers(){
