@@ -3,9 +3,11 @@
     This is sloppy and should be moved to a different class.
     Furthermore, to ease proper seeding, I want to create a perfect power of 2 bracket then expand nodes to add
     "play in" matches as needed.  (See bracket construction notes below).
-    In order to make this easier, I want to mpa player id to bracket node, so I don't have to search for places to insert.
+    In order to make this easier, I want to map player id to bracket node, so I don't have to search for places to insert.
   Since players are placed left to right in the bracket as is.  When seeding matters, I plan to swap the even number players
-  from the beginning to the end to crate a proper seeding system.
+  from the beginning to the end to crate a proper seeding system.  Note: The bracket generation will not have to swap players
+  when seeding matters this can be done by a driver class that takes user parameters.  The bracket simulation will just be 
+  given a list of players in order to be seeded.
 1->1                              1
 2->8                    [Winner of 8 and 9]
 3->3                              3
