@@ -7,6 +7,7 @@ public class Player{
 	public int id; //This seems like it will be useful, not sure.
 	public boolean isActive=true; //Used for Last hero standing
 	private boolean[] usedDecks; //False indicates a deck is unused.
+	public List<Match> history;
 	public	Player(String name, List<Deck> decks,int id){
 		this.name=name;
 		this.decks=decks;
