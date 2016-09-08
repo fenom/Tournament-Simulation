@@ -3,6 +3,6 @@ import java.util.*;
 public class Match{
 	public Player winner;
 	public Player loser;
-	public List<Games> games;
+	public List<Game> games;
 
 }

@@ -45,6 +45,9 @@ public class Player{
 	public void resetDecks(){
 		usedDecks=new boolean[decks.size()];
 	}
+	public void resetHistory(){
+		history=new LinkedList<Match>();
+	}
 	public boolean equals(Player p){
 		return p.id==this.id;
 	}

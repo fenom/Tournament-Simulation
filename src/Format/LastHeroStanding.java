@@ -9,7 +9,7 @@ public class LastHeroStanding implements Format{
 		Deck playerOneDeck;
 		Deck playerTwoDeck;
 		
-		while(playerOne.hasDecks() || playerTwo.hasDecks()){
+		while(playerOne.hasDecks() && playerTwo.hasDecks()){
 			if(playerOne.isActive){
 				playerOneDeck = playerOne.getUnusedDeck();
 			}
