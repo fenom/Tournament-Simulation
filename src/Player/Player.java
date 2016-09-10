@@ -1,6 +1,6 @@
 package Player;
 import java.util.Random;
-import java.util.List;
+import java.util.*;
 public class Player{
 	public String name;
 	private List<Deck> decks;

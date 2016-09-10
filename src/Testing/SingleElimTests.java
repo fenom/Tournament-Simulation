@@ -4,10 +4,12 @@ import Player.*;
 import Format.*;
 import java.util.*;
 import org.junit.*;
+import java.lang.Runtime;
 public class SingleElimTests{
-	SingleElim tournament;
-	@Before
-	public void setup(){	
+	static SingleElim tournament;
+	static SingleElim unevenBracket;
+	@BeforeClass
+	public static void setup(){	
 		Map<Integer,Float> matchUpsOne=new HashMap<>();
 		matchUpsOne.put(0,.5f);
 		matchUpsOne.put(1,.5f);
@@ -31,10 +33,20 @@ public class SingleElimTests{
 		Format format=new Conquest();
 		tournament=new SingleElim(players,format);
 		tournament.processRounds();
+		Runtime run=Runtime.getRuntime();
+		for(int i=128;i<133;i++){
+			players.add(new Player(String.valueOf(i),decks,i));
+		}
+		unevenBracket=new SingleElim(players,format);
+		unevenBracket.processRounds();
+//		System.out.println(run.totalMemory()-run.freeMemory());
+ 	
 	}
 	@Test
 	public void verifyBracket(){
 		assert(verifyPlayers(tournament.getBracket()));
+		System.out.println("Even bracket done.");
+		assert(verifyPlayers(unevenBracket.getBracket()));
 	}
 	public boolean verifyPlayers(BracketNode head){
 		Player p=head.payload;
@@ -45,5 +57,6 @@ public class SingleElimTests{
 		}else
 			return false;
 	}
+
 
 }

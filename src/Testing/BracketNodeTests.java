@@ -4,27 +4,39 @@ import Player.*;
 import java.util.*;
 import org.junit.*;
 public class BracketNodeTests{
-	int size=32;
-	BracketNode test;
-	@Before
-	public void setup(){
+	static int size=32;
+	static BracketNode test;
+	static BracketNode test2;
+	@BeforeClass
+	public static void setup(){
 		List<Player> players=new LinkedList<>();
 		for(int i=0;i<size;i++){
-			players.add(new Player(String.valueOf(i)));
+			Player p=new Player(String.valueOf(i));
+			p.id=i;
+			players.add(p);
 		}
 		test=BracketConstruction.generateBracketHelper(players);
+		for(int i=size;i<size+5;i++){
+			Player p=new Player(String.valueOf(i));
+			p.id=i;
+			players.add(p);
+		}
+		test2=BracketConstruction.generateBracketHelper(players);
 	}
 	@Test
 	public void testNumberOfPlayers(){
 		assert(countPlayers(test)==size);
+		assert(countPlayers(test2)==size+5);
 	}
 	@Test
 	public void testSpace(){
 		assert(countSpace(test)==(2*size-1));
+		assert(countSpace(test)==(2*size-1+5));
 	}
 	@Test
 	public void testPlayersAtLeaves(){
 		assert(playersAtLeaves(test));
+		assert(playersAtLeaves(test2));
 	}
 	public boolean playersAtLeaves(BracketNode head){
 		if(head.payload!=null){

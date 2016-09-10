@@ -28,6 +28,16 @@ or how many players brought zoo and how many players with zoo made top 8
 	private Map<Integer,HashMap<Integer,Integer>> playerMap;
 	private Map<Integer,List<List<Match>>> playerIDPath;
 	private Map<Integer,List<List<Match>>> playerPlacementPath;
+	private Map<Integer,List<Player>> results;
+	private Map<Integer,Integer> playerRankings;
+	private Map<Integer,Player> players;
+	/*
+		The idea here is to have the maps be set with the data I want
+		so I'll never have to insert into the maps, all the buckets
+		will be there on initialization.
+
+	*/
+
 
 	public void setPlacementMap(Map<Integer,HashMap<Integer,Integer>> map){
 		placementMap=map;
@@ -54,7 +64,66 @@ or how many players brought zoo and how many players with zoo made top 8
 	public Map<Integer,List<List<Match>>> getPlacementPathMap(){
 		return playerPlacementPath;
 	}
-
+	/*
+		I think I want to update the maps with data using a 
+		Map<Ranking,List<Player>> thus I can just iterate over the keyset
+		of the stored maps.  This reduces my time to the space used by the
+		objects in this class.
+	*/
+	public void updateMaps(Map<Integer,List<Player>> map,Map<Integer,Integer> playerRankings){
+		results=map;
+		this.playerRankings=playerRankings;
+		updatePlacementMap();
+		updatePlayerMap();
+		updatePlacementPathMap();
+		updatePlayerPathMap();
+	}
+	public void updatePlacementMap(){
+		for(Integer i: placementMap.keySet()){
+			if(results.get(i)!=null){
+				Map<Integer,Integer> map=placementMap.get(i);
+				for(Player p: results.get(i)){
+					int id=p.id;
+					if(map.get(id)!=null)
+						map.put(id,map.get(id)+1);
+					else
+						map.put(id,1);
+				}
+			}
+		}		
+	}
+	public void updatePlayerMap(){
+		for(Integer i: playerMap.keySet()){
+			Map<Integer,Integer> map=playerMap.get(i);
+			int rank=playerRankings.get(i);
+			if(map.get(rank)==null)
+				map.put(rank,1);
+			else
+				map.put(rank,map.get(rank)+1);
+		}
+	}
+	public void updatePlacementPathMap(){
+		for(Integer i: playerPlacementPath.keySet()){
+			List<List<Match>> list=playerPlacementPath.get(i);
+			for(Player p: results.get(i)){
+				if(list==null){
+					list=new LinkedList<List<Match>>();
+					list.add(p.history);
+				}else{
+					list.add(p.history);
+				}
+			}
+		}
+	}
+	public void updatePlayerPathMap(){
+		for(Integer i: playerIDPath.keySet()){
+			List<List<Match>> list=playerIDPath.get(i);
+			if(list==null)
+				list=new LinkedList<List<Match>>();
+			list.add(players.get(i).history);
+			
+		}
+	}
 }
 
 

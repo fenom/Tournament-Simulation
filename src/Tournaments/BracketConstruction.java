@@ -33,6 +33,7 @@ public class BracketConstruction{
 
         }
 	public static void expandNode(Player p, int nodeNumber){
+	//	System.out.println(nodeNumber);
 		BracketNode node=map.get(nodeNumber);
 		node.left=new BracketNode(p);
 		node.right=new BracketNode(node.payload);
