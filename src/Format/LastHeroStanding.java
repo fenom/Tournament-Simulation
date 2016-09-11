@@ -1,13 +1,16 @@
 package Format;
-import java.util.Random;
+
+import java.util.*;
 import Player.*;
 
 public class LastHeroStanding implements Format{
 	
 	public Player play(Player playerOne,Player playerTwo){		
 		Player winner;
-		Deck playerOneDeck;
-		Deck playerTwoDeck;
+		Player loser;
+		Deck playerOneDeck = playerOne.getUnusedDeck();
+		Deck playerTwoDeck = playerTwo.getUnusedDeck();
+		List<Game> games = new ArrayList<Game>();
 		
 		while(playerOne.hasDecks() && playerTwo.hasDecks()){
 			if(playerOne.isActive){
@@ -18,7 +21,6 @@ public class LastHeroStanding implements Format{
 			}
 			
 			float playerOneWin = playerOneDeck.getWinPercentage(playerTwoDeck);
-			
 			Random rng = new Random();
 			float playerTwoWin = rng.nextFloat();
 			
@@ -26,23 +28,36 @@ public class LastHeroStanding implements Format{
 				playerTwo.setDeckToUsed(playerTwoDeck);
 				playerOne.isActive = false;
 				playerTwo.isActive = true;
+				// when the player gets added as a game, their decks are messed up
+				Game game = new Game(playerOne, playerTwo, playerOneDeck, playerTwoDeck);
+				games.add(game);
 			}
 			else{
 				playerOne.setDeckToUsed(playerOneDeck);
 				playerOne.isActive = true;
 				playerTwo.isActive = false;
+				Game game = new Game(playerTwo, playerOne, playerTwoDeck, playerOneDeck);
+				games.add(game);
 			}
 		}
 		
 		if(playerTwo.hasDecks()){
+			playerOne.resetDecks();
+			playerTwo.resetDecks();
 			winner = playerTwo;
+			loser = playerOne;
+			
 		}
 		else{
+			playerOne.resetDecks();
+			playerTwo.resetDecks();
 			winner = playerOne;
+			loser = playerTwo;
 		}
-		playerOne.resetDecks();
-		playerTwo.resetDecks();
 		
+		Match match = new Match(winner, loser, games);
+		playerOne.addHistory(match);
+		playerTwo.addHistory(match);
 		return winner;
 	}
 }
