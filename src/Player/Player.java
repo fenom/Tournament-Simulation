@@ -13,6 +13,7 @@ public class Player{
 		this.decks=decks;
 		this.id=id;
 		usedDecks=new boolean[decks.size()];
+		history = new LinkedList<Match>();
 	}
 	//Just for testing purposes.
 	public Player(String name){
@@ -44,6 +45,9 @@ public class Player{
 	}
 	public void resetDecks(){
 		usedDecks=new boolean[decks.size()];
+	}
+	public void addHistory(Match match){
+		history.add(match);
 	}
 	public void resetHistory(){
 		history=new LinkedList<Match>();
