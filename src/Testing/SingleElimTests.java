@@ -8,6 +8,7 @@ import java.lang.Runtime;
 public class SingleElimTests{
 	static SingleElim tournament;
 	static SingleElim unevenBracket;
+	static Results results;
 	@BeforeClass
 	public static void setup(){	
 		Map<Integer,Float> matchUpsOne=new HashMap<>();
@@ -33,6 +34,7 @@ public class SingleElimTests{
 		Format format=new Conquest();
 		tournament=new SingleElim(players,format);
 		tournament.processRounds();
+		results=new Results();
 		Runtime run=Runtime.getRuntime();
 		for(int i=128;i<133;i++){
 			players.add(new Player(String.valueOf(i),decks,i));
