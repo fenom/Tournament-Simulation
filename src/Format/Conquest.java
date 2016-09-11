@@ -8,7 +8,7 @@ public class Conquest implements Format{
 	public Player play(Player playerOne,Player playerTwo){		
 		Player winner;
 		Player loser;
-		List<Game> games = new ArrayList<Game>();
+		List<Game> games = new LinkedList<Game>();
 		
 		while(playerOne.hasDecks() && playerTwo.hasDecks()){
 			Deck playerOneDeck = playerOne.getUnusedDeck();

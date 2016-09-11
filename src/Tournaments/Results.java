@@ -24,10 +24,10 @@ or how many players brought zoo and how many players with zoo made top 8
 "
 
 	*/
-	private Map<Integer,HashMap<Integer,Integer>> placementMap;
-	private Map<Integer,HashMap<Integer,Integer>> playerMap;
-	private Map<Integer,List<List<Match>>> playerIDPath;
-	private Map<Integer,List<List<Match>>> playerPlacementPath;
+	private Map<Integer,HashMap<Integer,Integer>> placementMap=new HashMap<>();
+	private Map<Integer,HashMap<Integer,Integer>> playerMap=new HashMap<>();
+	private Map<Integer,List<List<Match>>> playerIDPath=new HashMap<>();
+	private Map<Integer,List<List<Match>>> playerPlacementPath=new HashMap<>();
 	private Map<Integer,List<Player>> results;
 	private Map<Integer,Integer> playerRankings;
 	private Map<Integer,Player> players;
@@ -38,28 +38,37 @@ or how many players brought zoo and how many players with zoo made top 8
 
 	*/
 
-
-	public void setPlacementMap(Map<Integer,HashMap<Integer,Integer>> map){
-		placementMap=map;
+	public Map<Integer,Player> getPlayers(){
+		return players;
+	}
+	public Map<Integer,Integer> getPlayerRankings(){
+		return playerRankings;
+	}
+	public void setPlacementMap(int i){
+		if(placementMap.get(i)==null)
+			placementMap.put(i,new HashMap<Integer,Integer>());
 	}
 
 	public Map<Integer,HashMap<Integer,Integer>> getPlacementMap(){
 		return placementMap;
 	}	
-	public void setPlayerMap(Map<Integer,HashMap<Integer,Integer>> map){
-		playerMap=map;
+	public void setPlayerMap(int i){
+		if(playerMap.get(i)==null)
+			playerMap.put(i,new HashMap<Integer,Integer>());
 	}
 	public Map<Integer,HashMap<Integer,Integer>> getPlayerMap(){
 		return playerMap;
 	}
-	public void setPlayerPathMap(Map<Integer,List<List<Match>>> map){
-		playerIDPath=map;
+	public void setPlayerPathMap(int i){
+		if(playerIDPath.get(i)==null)
+			playerIDPath.put(i,new LinkedList<List<Match>>());
 	}
 	public Map<Integer,List<List<Match>>> getPlayerPathMap(){
 		return playerIDPath;
 	}
-	public void setPlacementPathMap(Map<Integer,List<List<Match>>> map){
-		playerPlacementPath=map;
+	public void setPlacementPathMap(int i){
+		if(playerPlacementPath.get(i)==null)
+			playerPlacementPath.put(i,new LinkedList<List<Match>>());
 	}
 	public Map<Integer,List<List<Match>>> getPlacementPathMap(){
 		return playerPlacementPath;

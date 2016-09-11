@@ -10,7 +10,7 @@ public class LastHeroStanding implements Format{
 		Player loser;
 		Deck playerOneDeck = playerOne.getUnusedDeck();
 		Deck playerTwoDeck = playerTwo.getUnusedDeck();
-		List<Game> games = new ArrayList<Game>();
+		List<Game> games = new LinkedList<Game>();
 		
 		while(playerOne.hasDecks() && playerTwo.hasDecks()){
 			if(playerOne.isActive){
