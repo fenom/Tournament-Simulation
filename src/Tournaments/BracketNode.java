@@ -4,7 +4,7 @@ import Player.*;
 public class BracketNode{
 	public BracketNode left;
 	public BracketNode right;
-	//BracketNode parent;
+	public BracketNode parent;
 	public Player payload=null;
 	public BracketNode(Player p){
 		payload=p;

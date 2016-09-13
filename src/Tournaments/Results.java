@@ -16,19 +16,27 @@ or did player 112 make top 8
 or how many players brought zoo and how many players with zoo made top 8
 "
 	*/
+	//Placement in a tournament P->(Player-># of times placed at P)
 	private Map<Integer,HashMap<Integer,Integer>> placementMap=new HashMap<>();
+	//Player id->(Placement in tourney P-># of times placed at P)
 	private Map<Integer,HashMap<Integer,Integer>> playerMap=new HashMap<>();
+	//Player id->List of matche histories of player in tournaments.
 	private Map<Integer,List<List<Match>>> playerIDPath=new HashMap<>();
+	//Placement in Tourmanet P->List of match histories players that placed at P
 	private Map<Integer,List<List<Match>>> playerPlacementPath=new HashMap<>();
+	//Placement in tournament->List of players who placed there (in one simulation)
 	private Map<Integer,List<Player>> results;
+	//Player id->Place in tournament
 	private Map<Integer,Integer> playerRankings;
-	private Map<Integer,Player> players;
+	//Player id->Player object
+	private Map<Integer,Player> players=new HashMap<>();
+	//Player id->list of bottom bracket node of tournament.
+	private Map<Integer,List<BracketNode>> bracketPath=new HashMap<>();
 	/*
 		The idea here is to have the maps be set with the data I want
 		so I'll never have to insert into the maps, all the buckets
 		will be there on initialization.
 	*/
-
 	public Map<Integer,Player> getPlayers(){
 		return players;
 	}
@@ -44,7 +52,12 @@ or how many players brought zoo and how many players with zoo made top 8
 	public Map<Integer,List<List<Match>>> getPlacementPathMap(){
 		return playerPlacementPath;
 	}
-	
+	public Map<Integer,List<BracketNode>> getBracketMap(){
+		return bracketPath;
+	}
+	public void setPlayers(Player p){
+		players.put(p.id,p);
+	}	
 	public void setPlacementMap(int i){
 		if(placementMap.get(i)==null)
 			placementMap.put(i,new HashMap<Integer,Integer>());
@@ -64,20 +77,32 @@ or how many players brought zoo and how many players with zoo made top 8
 		if(playerPlacementPath.get(i)==null)
 			playerPlacementPath.put(i,new LinkedList<List<Match>>());
 	}
-	
+	public void setBracketPath(int i){
+		if(bracketPath.get(i)==null)
+			bracketPath.put(i, new LinkedList<BracketNode>());
+	}
 	/*
 		I think I want to update the maps with data using a 
 		Map<Ranking,List<Player>> thus I can just iterate over the keyset
 		of the stored maps.  This reduces my time to the space used by the
 		objects in this class.
 	*/
-	public void updateMaps(Map<Integer,List<Player>> map,Map<Integer,Integer> playerRankings){
+	public void updateMaps(Map<Integer,List<Player>> map,Map<Integer,Integer> playerRankings,Map<Integer,BracketNode> brackets){
 		results=map;
 		this.playerRankings=playerRankings;
 		updatePlacementMap();
 		updatePlayerMap();
 		updatePlacementPathMap();
 		updatePlayerPathMap();
+		updateBracketMap(brackets);
+	}
+	public void updateBracketMap(Map<Integer,BracketNode> map){
+		for(Integer i:bracketPath.keySet()){
+			if(map.get(i)!=null){
+				List<BracketNode> list=bracketPath.get(i);
+				list.add(map.get(i));
+			}
+		}
 	}
 	public void updatePlacementMap(){
 		for(Integer i: placementMap.keySet()){
@@ -107,7 +132,7 @@ or how many players brought zoo and how many players with zoo made top 8
 		for(Integer i: playerPlacementPath.keySet()){
 			List<List<Match>> list=playerPlacementPath.get(i);
 			if(results.containsKey(i)){
-				for(Player p: results.get(i)){
+				for(Player p: results.get(i)){	
 					if(list==null){
 						list=new LinkedList<List<Match>>();
 						list.add(p.history);

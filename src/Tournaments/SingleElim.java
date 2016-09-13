@@ -4,6 +4,7 @@ import Format.*;
 import java.util.*;
 public class SingleElim implements Tournament{
 	BracketNode bracket;
+	BracketConstruction constructor;
 	List<Player> players;
 	Format format;
 	DataObject data;
@@ -11,6 +12,7 @@ public class SingleElim implements Tournament{
 	public SingleElim(List<Player> players,Format format){
 		this.players=players;
 		this.format=format;
+		constructor=new BracketConstruction();
 		this.setup();
 	}
 	public void processRounds(){
@@ -28,6 +30,8 @@ public class SingleElim implements Tournament{
 			processHelper(head.right);
 		Player playerOne=head.left.payload;
 		Player playerTwo=head.right.payload;
+		head.left.parent=head;
+		head.right.parent=head;
 		//We have two players, lets evaluate this round.
 		if(playerOne!=null && playerTwo!=null)
 			head.payload=format.play(playerOne,playerTwo);
@@ -39,13 +43,17 @@ public class SingleElim implements Tournament{
 		return bracket;
 	}
 	public void setup(){	
-		bracket=BracketConstruction.generateBracketHelper(this.players);
+		bracket=constructor.generateBracketHelper(this.players);
 	}
 	public void getResults(){
 		Map<Integer,List<Player>> rankMap=new HashMap<Integer,List<Player>>();
 		Map<Integer,Integer> idRank=new HashMap<Integer,Integer>();
 		populateMaps(rankMap,idRank,bracket,1);
-		results.updateMaps(rankMap,idRank);
+		results.updateMaps(rankMap,idRank,constructor.map);
+	}
+	public void resetHistory(){
+		for(Player p:players)
+			p.resetHistory();
 	}
 	public void populateMaps(Map<Integer,List<Player>> rank, Map<Integer,Integer> id, BracketNode node, int depth){
 		if(node==null)

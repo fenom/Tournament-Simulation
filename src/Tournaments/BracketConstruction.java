@@ -3,11 +3,11 @@ import Player.*;
 import java.util.*;
 import Tournaments.BracketNode;
 public class BracketConstruction{
-	public static Map<Integer,BracketNode> map=new HashMap<>();
-	public BracketConstruction(Map<Integer,BracketNode> inMap){
-		this.map=inMap;
-	}
-	public static BracketNode generateBracket(BracketNode node, ListIterator<Player> players,int depth){
+	public  Map<Integer,BracketNode> map=new HashMap<>();
+//	public BracketConstruction(Map<Integer,BracketNode> inMap){
+//		this.map=inMap;
+//	}
+	public BracketNode generateBracket(BracketNode node, ListIterator<Player> players,int depth){
                 if(depth==0){
                         BracketNode retVal=new BracketNode();
 			Player p=players.next();
@@ -19,7 +19,7 @@ public class BracketConstruction{
                 node.right=generateBracket(new BracketNode(),players,depth-1);
                 return  node;
         }
-        public static BracketNode generateBracketHelper(List<Player> players){
+        public BracketNode generateBracketHelper(List<Player> players){
                 ListIterator<Player> iterator=players.listIterator();
                 BracketNode bn= generateBracket(new BracketNode(),iterator,log2(players.size()));
                 //while iterator.hasNext() add players with byes.
@@ -32,7 +32,7 @@ public class BracketConstruction{
                 return bn;
 
         }
-	public static void expandNode(Player p, int nodeNumber){
+	public void expandNode(Player p, int nodeNumber){
 	//	System.out.println(nodeNumber);
 		BracketNode node=map.get(nodeNumber);
 		node.left=new BracketNode(p);
