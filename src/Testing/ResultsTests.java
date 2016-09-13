@@ -2,13 +2,17 @@ package Testing;
 import Tournaments.*;
 import Player.*;
 import Format.*;
+
 import java.util.*;
+
 import org.junit.*;
+
 import java.lang.Runtime;
+
 public class ResultsTests{
 	static SingleElim tournament;
 	static Results results;
-	static size=128;
+	static int size=128;
 	@BeforeClass
 	public static void setup(){
 		Map<Integer,Float> matchUpsOne=new HashMap<>();
@@ -45,8 +49,45 @@ public class ResultsTests{
 	populated.  So we need a test for that.  We hould also verify that the right
 	data is placed in the maps, by using the results, playerRankings, and players
 	maps in the results object.*/
+	@Test
+	public void testPlayers(){
+		assert(countPlayers()==size);
+	}
+	public int countPlayers(){
+		Map<Integer,Player> players = results.getPlayers();
+		return players.size();
+	}
+	
+	public void testPlayerRankings(){
+		assert(countRanking()==size);
+	}
+	public int countRanking(){
+		Map<Integer,Integer> playerRankings = results.getPlayerRankings();
+		return playerRankings.size();
+	}
+	
+	public void testPlacementMap(){
+		assert(countPlacementMap()==size);
+	}
+	public int countPlacementMap(){
+		Map<Integer,HashMap<Integer,Integer>> placementMap = results.getPlacementMap();
+		return placementMap.size();
+	}
 
+	public void testPlayerMap(){
+		assert(countPlayerMap()==size);
+	}
+	public int countPlayerMap(){
+		Map<Integer,HashMap<Integer,Integer>> playerMap = results.getPlayerMap();
+		return playerMap.size();
+	}
 
-
-
+	public void testPlacementPathMap(){
+		assert(countPlacementPathMap()==size);
+	}
+	public int countPlacementPathMap(){
+		Map<Integer,List<List<Match>>> placementPathMap = results.getPlacementPathMap();
+		return placementPathMap.size();
+	}
+	
 }
