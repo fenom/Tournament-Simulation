@@ -13,7 +13,7 @@ public class ResultsTests{
 	static SingleElim tournament;
 	static Results results;
 	static int simulations=10000;
-	static int size=128;
+	static int size=154;
 	@BeforeClass
 	public static void setup(){
 		Map<Integer,Float> matchUpsOne=new HashMap<>();

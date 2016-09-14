@@ -7,7 +7,6 @@ public class SingleElim implements Tournament{
 	BracketConstruction constructor;
 	List<Player> players;
 	Format format;
-	DataObject data;
 	Results results;
 	public SingleElim(List<Player> players,Format format){
 		this.players=players;
