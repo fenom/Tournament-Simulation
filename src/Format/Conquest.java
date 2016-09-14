@@ -3,50 +3,38 @@ package Format;
 import java.util.*;
 import Player.*;
 
-public class LastHeroStanding implements Format{
+public class Conquest implements Format{
 	
 	public Player play(Player playerOne,Player playerTwo){		
 		Player winner;
 		Player loser;
-		Deck playerOneDeck = playerOne.getUnusedDeck();
-		Deck playerTwoDeck = playerTwo.getUnusedDeck();
 		List<Game> games = new LinkedList<Game>();
 		
 		while(playerOne.hasDecks() && playerTwo.hasDecks()){
-			if(playerOne.isActive){
-				playerOneDeck = playerOne.getUnusedDeck();
-			}
-			if(playerTwo.isActive){
-				playerTwoDeck = playerTwo.getUnusedDeck();
-			}
+			Deck playerOneDeck = playerOne.getUnusedDeck();
+			Deck playerTwoDeck = playerTwo.getUnusedDeck();
 			
 			float playerOneWin = playerOneDeck.getWinPercentage(playerTwoDeck);
 			Random rng = new Random();
 			float playerTwoWin = rng.nextFloat();
 			
 			if(playerOneWin > playerTwoWin){
-				playerTwo.setDeckToUsed(playerTwoDeck);
-				playerOne.isActive = false;
-				playerTwo.isActive = true;
-				// when the player gets added as a game, their decks are messed up
+				playerOne.setDeckToUsed(playerOneDeck);
 				Game game = new Game(playerOne, playerTwo, playerOneDeck, playerTwoDeck);
 				games.add(game);
 			}
 			else{
-				playerOne.setDeckToUsed(playerOneDeck);
-				playerOne.isActive = true;
-				playerTwo.isActive = false;
+				playerTwo.setDeckToUsed(playerTwoDeck);
 				Game game = new Game(playerTwo, playerOne, playerTwoDeck, playerOneDeck);
 				games.add(game);
 			}
 		}
 		
-		if(playerTwo.hasDecks()){
+		if(playerOne.hasDecks()){
 			playerOne.resetDecks();
 			playerTwo.resetDecks();
 			winner = playerTwo;
 			loser = playerOne;
-			
 		}
 		else{
 			playerOne.resetDecks();

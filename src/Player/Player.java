@@ -1,21 +1,28 @@
 package Player;
 import java.util.Random;
-import java.util.List;
+import java.util.*;
 public class Player{
 	public String name;
 	private List<Deck> decks;
 	public int id; //This seems like it will be useful, not sure.
 	public boolean isActive=true; //Used for Last hero standing
 	private boolean[] usedDecks; //False indicates a deck is unused.
-	public	Player(String name, List<Deck> decks){
+	public List<Match> history;
+	public	Player(String name, List<Deck> decks,int id){
 		this.name=name;
 		this.decks=decks;
+		this.id=id;
 		usedDecks=new boolean[decks.size()];
+		history = new LinkedList<Match>();
+	}
+	//Just for testing purposes.
+	public Player(String name){
+		this.name=name;
 	}
 	public boolean hasDecks(){
 		for(boolean b: usedDecks){
 			if(!b)
-				return true;;
+				return true;
 		}
 		return false;
 	}
@@ -39,5 +46,13 @@ public class Player{
 	public void resetDecks(){
 		usedDecks=new boolean[decks.size()];
 	}
-
+	public void addHistory(Match match){
+		history.add(match);
+	}
+	public void resetHistory(){
+		history=new LinkedList<Match>();
+	}
+	public boolean equals(Player p){
+		return p.id==this.id;
+	}
 }
