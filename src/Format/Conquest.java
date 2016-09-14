@@ -9,7 +9,8 @@ public class Conquest implements Format{
 		Player winner;
 		Player loser;
 		List<Game> games = new LinkedList<Game>();
-		
+		//If bans enabled
+		getBans(playerOne,playerTwo);
 		while(playerOne.hasDecks() && playerTwo.hasDecks()){
 			Deck playerOneDeck = playerOne.getUnusedDeck();
 			Deck playerTwoDeck = playerTwo.getUnusedDeck();
@@ -48,4 +49,9 @@ public class Conquest implements Format{
 		playerTwo.addHistory(match);
 		return winner;
 	}
+	public void getBans(Player p1,Player p2){
+		p1.setDeckToUsed(p2.getBan(p1));
+		p2.setDeckToUsed(p1.getBan(p2));
+	}
+	
 }

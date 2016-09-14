@@ -55,4 +55,21 @@ public class Player{
 	public boolean equals(Player p){
 		return p.id==this.id;
 	}
+	public List<Deck> getDecks(){
+		return decks;
+	}
+	public Deck getBan(Player p){
+		List<Deck> opponentDecks=p.getDecks();
+		Deck ban=null;
+		float f=0;
+		for(Deck d:opponentDecks){
+			float temp=0;
+			for(Deck d2:this.decks){
+				temp+=d.getWinPercentage(d2);
+			}
+			if(temp>f)
+				ban=d;
+		}
+		return ban;
+	}
 }

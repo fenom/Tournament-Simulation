@@ -37,6 +37,8 @@ public class SingleElim implements Tournament{
 	}
 	public void setResults(Results r){
 		results=r;
+		for(Player p: players)
+			r.setPlayers(p);
 	}
 	public BracketNode getBracket(){
 		return bracket;

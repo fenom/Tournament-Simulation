@@ -8,6 +8,7 @@ public class LastHeroStanding implements Format{
 	public Player play(Player playerOne,Player playerTwo){		
 		Player winner;
 		Player loser;
+		getBans(playerOne,playerTwo);
 		Deck playerOneDeck = playerOne.getUnusedDeck();
 		Deck playerTwoDeck = playerTwo.getUnusedDeck();
 		List<Game> games = new LinkedList<Game>();
@@ -60,4 +61,9 @@ public class LastHeroStanding implements Format{
 		playerTwo.addHistory(match);
 		return winner;
 	}
+	public void getBans(Player p1,Player p2){
+                p1.setDeckToUsed(p2.getBan(p1));
+                p2.setDeckToUsed(p1.getBan(p2));
+        }  
+
 }
