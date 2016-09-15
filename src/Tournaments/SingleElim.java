@@ -32,8 +32,10 @@ public class SingleElim implements Tournament{
 		head.left.parent=head;
 		head.right.parent=head;
 		//We have two players, lets evaluate this round.
-		if(playerOne!=null && playerTwo!=null)
+		if(playerOne!=null && playerTwo!=null){
+//			System.out.println(playerOne.name+" vs "+playerTwo.name);
 			head.payload=format.play(playerOne,playerTwo);
+		}
 	}
 	public void setResults(Results r){
 		results=r;

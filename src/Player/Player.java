@@ -67,8 +67,10 @@ public class Player{
 			for(Deck d2:this.decks){
 				temp+=d.getWinPercentage(d2);
 			}
-			if(temp>f)
+			if(temp>f){
 				ban=d;
+				f=temp;
+			}
 		}
 		return ban;
 	}

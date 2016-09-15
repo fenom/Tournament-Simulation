@@ -50,6 +50,10 @@ public class Conquest implements Format{
 		return winner;
 	}
 	public void getBans(Player p1,Player p2){
+		Deck d1=p2.getBan(p1);
+		Deck d2=p1.getBan(p2);
+//		System.out.println(p1.name+" bans "+d2.name);
+//		System.out.println(p2.name+" bans "+d1.name);
 		p1.setDeckToUsed(p2.getBan(p1));
 		p2.setDeckToUsed(p1.getBan(p2));
 	}

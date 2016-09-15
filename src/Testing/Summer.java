@@ -9,9 +9,9 @@ import java.io.*;
 public class Summer{
 	List<Deck> decks=new ArrayList<>();
 	List<Player> players=new ArrayList<>();
+	int simulations=1000000;
 	public void getDecks() throws FileNotFoundException{
 		File f=new File("Winrate.csv");
-		System.out.println(f.canRead());
 		Scanner scan=new Scanner(f);
 		while(scan.hasNextLine()){
 			String line=scan.nextLine();
@@ -49,14 +49,25 @@ public class Summer{
 		for(int i=1;i<9;i++){
 			r.setPlayerMap(i);
 		}
+		testBracket(tournament.getBracket());
 		tournament.setResults(r);
-		for(int i=0;i<100000;i++){
+		for(int i=0;i<simulations;i++){
 			tournament.processRounds();
 			tournament.getResults();
 			tournament.setup();
 			tournament.resetHistory();
 		}
 		r.outputPlayerRankings();
+	}
+	public void testBracket(BracketNode head){
+		if(head==null)
+			return;
+		if(head.payload==null){
+			testBracket(head.left);
+			testBracket(head.right);
+		}else{
+			System.out.println(head.payload.name);
+		}
 	}
 	public static void main(String[] args) throws FileNotFoundException{
 		Summer s=new Summer();

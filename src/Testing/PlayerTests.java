@@ -11,15 +11,19 @@ public class PlayerTests{
 	Player owen;
 	@Before
 	public void before(){
-		Deck renoMage=new Deck("Reno Mage",new HashMap<Integer,Integer>(),0);
-		Deck comboDruid=new Deck("Combo Druid",new HashMap<Integer,Integer>(),1);
-		Deck turboWarrior=new Deck("C'thun Warrior",new HashMap<Integer,Integer>(),2);
+		Map<Integer,Float> map=new HashMap<>();
+		map.put(0,.3f);
+		map.put(1,.7f);
+		map.put(2,.4f);
+		Deck renoMage=new Deck("Reno Mage",map,0);
+		Deck comboDruid=new Deck("Combo Druid",map,1);
+		Deck turboWarrior=new Deck("C'thun Warrior",map,2);
 		decks=new ArrayList<>();
 		decks.add(renoMage);
 		decks.add(comboDruid);
 		decks.add(turboWarrior);
-		david=new Player("David 'BirthdayLion' Steinberg",decks);
-		owen=new Player("StarGazer",decks);
+		david=new Player("David 'BirthdayLion' Steinberg",decks,1);
+		owen=new Player("StarGazer",decks,2);
 	}
 	@Test
 	public void deckCheck(){
@@ -36,6 +40,14 @@ public class PlayerTests{
 		assert(owen.hasDecks());
 		assert(david.hasDecks());
 	}	
-
+	@Test
+	public void banCheck(){
+		assert(owen.getDecks().size()==3);
+		assert(david.getDecks().size()==3);
+		owen.setDeckToUsed(david.getBan(owen));
+		david.setDeckToUsed(david.getBan(owen));
+		assert(owen.getDecks().size()==2);
+		assert(david.getDecks().size()==2);
+	}
 
 }

@@ -157,7 +157,7 @@ or how many players brought zoo and how many players with zoo made top 8
 			Player p=players.get(i);
 			Map<Integer,Integer> map=playerMap.get(i);
 			for(Integer i2:map.keySet()){
-				System.out.println(p.name+" finished "+i2+"th "+map.get(i2)+" times");
+				System.out.println(p.name+" finished "+i2+"th "+(float)map.get(i2)/1000000+" times");
 			}
 		}
 	}
