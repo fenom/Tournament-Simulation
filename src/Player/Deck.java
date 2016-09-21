@@ -17,4 +17,7 @@ public class Deck{
 //			return .5f;
 		return this.matchups.get(deck.id);
 	}
+        public boolean equals(Deck d){ 
+                return this.id==d.id;
+        }   
 }

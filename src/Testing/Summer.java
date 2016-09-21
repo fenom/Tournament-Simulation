@@ -11,7 +11,7 @@ public class Summer{
 	List<Player> players=new ArrayList<>();
 	int simulations=1000000;
 	public void getDecks() throws FileNotFoundException{
-		File f=new File("Winrate.csv");
+		File f=new File("SpringWinrate.csv");
 		Scanner scan=new Scanner(f);
 		while(scan.hasNextLine()){
 			String line=scan.nextLine();
@@ -27,7 +27,7 @@ public class Summer{
 		}
 	}
 	public void getPlayers() throws FileNotFoundException{
-		File f=new File("Players.csv");
+		File f=new File("SpringPlayers.csv");
 		f.canRead();
 		Scanner scan=new Scanner(f);
 		while(scan.hasNextLine()){
