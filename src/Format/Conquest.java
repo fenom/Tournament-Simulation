@@ -99,8 +99,8 @@ public class Conquest implements Format{
 					d2=d;
 			}
 		}
-*/		//System.out.println(p1.name+" id: "+p1.id+" bans "+d2.name);
-		//System.out.println(p2.name+" id: "+p2.id+" bans "+d1.name);
+*/	//	System.out.println(p1.name+" id: "+p1.id+" bans "+d2.name);
+	//	System.out.println(p2.name+" id: "+p2.id+" bans "+d1.name);
 		p1.setDeckToUsed(d1);
 		p2.setDeckToUsed(d2);
 		//Random Bans

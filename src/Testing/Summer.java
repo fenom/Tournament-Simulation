@@ -10,8 +10,9 @@ public class Summer{
 	List<Deck> decks=new ArrayList<>();
 	List<Player> players=new ArrayList<>();
 	int simulations=1000000;
+	int numPlayers=4;
 	public void getDecks() throws FileNotFoundException{
-		File f=new File("SpringWinrate.csv");
+		File f=new File("EUWinrate.csv");
 		Scanner scan=new Scanner(f);
 		while(scan.hasNextLine()){
 			String line=scan.nextLine();
@@ -27,7 +28,7 @@ public class Summer{
 		}
 	}
 	public void getPlayers() throws FileNotFoundException{
-		File f=new File("SpringPlayers.csv");
+		File f=new File("EUPlayers.csv");
 		f.canRead();
 		Scanner scan=new Scanner(f);
 		while(scan.hasNextLine()){
@@ -46,7 +47,7 @@ public class Summer{
 	public void runTournament(){
 		Results r=new Results();
 		SingleElim tournament=new SingleElim(players, new Conquest());
-		for(int i=1;i<9;i++){
+		for(int i=1;i<numPlayers+1;i++){
 			r.setPlayerMap(i);
 		}
 		testBracket(tournament.getBracket());
